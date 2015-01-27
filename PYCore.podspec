@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
   s.social_media_url   = "https://twitter.com/littlepush"
 
   s.platform     = :ios
-  s.source       = { :git => "https://github.com/littlepush/PYCore.git" }
+  s.source       = { :git => "https://github.com/littlepush/PYCore.git", :tag => "0.9" }
 
   s.source_files  = "static-library/*.{h,m}", "static-library/**/*.{h,m}"
 end

@@ -347,7 +347,9 @@ PYGETNIL( PYGETNIL(_obj, _getter1), _getter2 )
 #define PYGETDEFAULT( _obj, _getter, _default )             \
 ({ ((_obj) == nil) ? (_default) : [(_obj) _getter]; })
 
+#ifndef PYFLOATEQUAL
 #define PYFLOATEQUAL( f1, f2 )                  (ABS((f1) - (f2)) < 0.001)
+#endif
 
 #define PYTHROW( f, ... )                                   \
     [self raiseExceptionWithMessage:[NSString               \

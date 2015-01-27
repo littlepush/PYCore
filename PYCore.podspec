@@ -19,8 +19,8 @@ Pod::Spec.new do |s|
                    DESC
 
   s.homepage     = "https://github.com/littlepush/PYCore"
-  s.license      = "GLPv3"
-  s.license      = { :type => "GLPv3", :file => "LICENSE" }
+  s.license      = "LGPLv3"
+  s.license      = { :type => "LGPLv3", :file => "LICENSE" }
 
   s.author             = { "Push Chen" => "littlepush@gmail.com" }
   s.social_media_url   = "https://twitter.com/littlepush"

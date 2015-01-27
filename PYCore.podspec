@@ -12,8 +12,7 @@ Pod::Spec.new do |s|
   s.summary      = "A tiny library to make Objective-C for iOS more powerful.."
 
   s.description  = <<-DESC
-                   PYCore is a Objective-C library to make iOS application development more
-                   easily.
+                   PYCore is a Objective-C library to make iOS application development more easily.
 
                    * PYCore contains many useful macros to short the code you will write
                    * It provides many validation methods for NSDictionary and NSString
@@ -26,7 +25,8 @@ Pod::Spec.new do |s|
   s.author             = { "Push Chen" => "littlepush@gmail.com" }
   s.social_media_url   = "https://twitter.com/littlepush"
 
-  s.platform     = :ios
+  s.platform     = :ios, "5.0"
+  s.requires_arc = true
   s.source       = { :git => "https://github.com/littlepush/PYCore.git", :tag => "0.9" }
 
   s.source_files  = "static-library/*.{h,m}", "static-library/**/*.{h,m}"

@@ -71,12 +71,29 @@
 {
     //    NSTimeZone *_timeZoen = [NSTimeZone defaultTimeZone];
     //    NSDate *_calDate = [date dateByAddingTimeInterval:-[_timeZoen secondsFromGMTForDate:date]];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_8_0
+    NSCalendar *calendar = __AUTO_RELEASE([[NSCalendar alloc]
+                                           initWithCalendarIdentifier:NSCalendarIdentifierGregorian]);
+    NSCalendarUnit _unit = (NSCalendarUnitWeekday |
+                            NSCalendarUnitYear |
+                            NSCalendarUnitMonth |
+                            NSCalendarUnitDay |
+                            NSCalendarUnitHour |
+                            NSCalendarUnitMinute |
+                            NSCalendarUnitSecond |
+                            NSCalendarUnitTimeZone);
+#else
     NSCalendar *calendar = __AUTO_RELEASE([[NSCalendar alloc]
                             initWithCalendarIdentifier:NSGregorianCalendar]);
-	NSCalendarUnit _unit = NSWeekdayCalendarUnit |
-    NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit |
-    NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit |
-    NSTimeZoneCalendarUnit;
+    NSCalendarUnit _unit = (NSWeekdayCalendarUnit |
+                            NSYearCalendarUnit |
+                            NSMonthCalendarUnit |
+                            NSDayCalendarUnit |
+                            NSHourCalendarUnit |
+                            NSMinuteCalendarUnit |
+                            NSSecondCalendarUnit |
+                            NSTimeZoneCalendarUnit);
+#endif
     
 	NSDateComponents *_dateComponents = [calendar components:_unit fromDate:date];
     

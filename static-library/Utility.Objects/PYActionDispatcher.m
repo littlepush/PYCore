@@ -45,6 +45,8 @@
 #import "PYPair.h"
 #import "NSObject+PYCore.h"
 #import "NSArray+PYCore.h"
+#include <objc/objc.h>
+#include <objc/runtime.h>
 
 static NSMutableDictionary      *_py_g_ad_event_map;
 
@@ -175,18 +177,20 @@ static NSMutableDictionary      *_py_g_ad_event_map;
     for ( PYPair *_taPair in _callbackList ) {
         __unsafe_unretained id _target = _taPair.first;
         SEL _action = NSSelectorFromString(_taPair.secondValue);
-        if ( info != nil && info2 != nil ) {
-            _result = [(NSObject *)_target
-                       tryPerformSelector:_action withObject:info withObject:info2];
-        } else if ( info != nil && info2 == nil ) {
-            _result = [(NSObject *)_target
-                       tryPerformSelector:_action withObject:info];
-        } else if ( info == nil && info2 == nil ) {
+        NSMethodSignature *_sig = [_target methodSignatureForSelector:_action];
+        int _paramCount = [_sig numberOfArguments] - 2;
+        
+        if ( _paramCount == 0 ) {
             _result = [(NSObject *)_target
                        tryPerformSelector:_action];
-        } else if ( info == nil && info2 != nil ) {
+        } else if ( _paramCount == 1 ) {
             _result = [(NSObject *)_target
-                       tryPerformSelector:_action withObject:info2];
+                       tryPerformSelector:_action withObject:info];
+        } else if ( _paramCount == 2 ) {
+            _result = [(NSObject *)_target
+                       tryPerformSelector:_action withObject:info withObject:info2];
+        } else {
+            continue;
         }
     }
     return _result;

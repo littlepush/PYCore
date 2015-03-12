@@ -178,7 +178,7 @@ static NSMutableDictionary      *_py_g_ad_event_map;
         __unsafe_unretained id _target = _taPair.first;
         SEL _action = NSSelectorFromString(_taPair.secondValue);
         NSMethodSignature *_sig = [_target methodSignatureForSelector:_action];
-        int _paramCount = [_sig numberOfArguments] - 2;
+        int _paramCount = (int)[_sig numberOfArguments] - 2;
         
         if ( _paramCount == 0 ) {
             _result = [(NSObject *)_target

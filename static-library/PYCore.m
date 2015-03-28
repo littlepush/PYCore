@@ -356,6 +356,8 @@ NSString *__currentDeviceModelName()
         case PYiPhone5:         return @"iPhone5";
         case PYiPhone5c:        return @"iPhone5c";
         case PYiPhone5s:        return @"iPhone5s";
+        case PYiPhone6:         return @"iPhone6";
+        case PYiPhone6P:        return @"iPhone6P";
         case PYiPod1:           return @"iPod1";
         case PYiPod2:           return @"iPod2";
         case PYiPod3:           return @"iPod3";
@@ -375,8 +377,10 @@ NSString *__currentDeviceModelName()
         case PYiPadMini1GSM:    return @"iPad Mini1 GSM";
         case PYiPadMiniRetinaWifi: return @"iPad Mini Retina Wifi";
         case PYiPadMiniRetinaGSM: return @"iPad Mini Retina GSM";
+        case PYiPadMini3:       return @"iPad Mini 3";
         case PYiPadAirWifi:     return @"iPad Air Wifi";
         case PYiPadAirGSM:      return @"iPad Air GSM";
+        case PYiPadAir2:        return @"iPad Air 2";
     };
     return @"Unknow";
 }
@@ -424,6 +428,12 @@ PYDeviceModel __getDeviceModel()
     else if ([modelName rangeOfString:@"iPhone6,"].location != NSNotFound) {
         //modelName = @"iPhone 5s"
         _model = PYiPhone5s;
+    }
+    else if ([modelName isEqualToString:@"iPhone7,2"] ) {
+        _model = PYiPhone6;
+    }
+    else if ([modelName isEqualToString:@"iPhone7,1"] ) {
+        _model = PYiPhone6P;
     }
     else if([modelName rangeOfString:@"iPod1,"].location != NSNotFound ) {
         //modelName = @"iPod 1st Gen";
@@ -500,6 +510,15 @@ PYDeviceModel __getDeviceModel()
     }
     else if([modelName isEqualToString:@"iPad4,2"]) {
         _model = PYiPadAirGSM;
+    }
+    else if ([modelName isEqualToString:@"iPad4,7"] ||
+             [modelName isEqualToString:@"iPad4,8"] ||
+             [modelName isEqualToString:@"iPad4,9"] ) {
+        _model = PYiPadMini3;
+    }
+    else if ([modelName isEqualToString:@"iPad5,3"] ||
+             [modelName isEqualToString:@"iPad5,4"] ) {
+        _model = PYiPadAir2;
     }
     
     return _model;

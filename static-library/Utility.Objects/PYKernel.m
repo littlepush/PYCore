@@ -136,7 +136,7 @@ PYSingletonDefaultImplementation
         }
         // Update version info.
         [NSKeyedArchiver
-         archiveRootObject:_oldVersionInCache
+         archiveRootObject:_version
          toFile:[PYLIBRARYPATH stringByAppendingPathComponent:@"com.ipy.lastversion"]];
         
         _deviceToken = [NSKeyedUnarchiver

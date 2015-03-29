@@ -124,7 +124,7 @@ PYSingletonDefaultImplementation
                     [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
         _oldVersionInCache = [NSKeyedUnarchiver
                               unarchiveObjectWithFile:
-                              [PYLIBRARYPATH stringByAppendingString:@"com.ipy.lastversion"]];
+                              [PYLIBRARYPATH stringByAppendingPathComponent:@"com.ipy.lastversion"]];
         if ( [_oldVersionInCache length] == 0 ) {
             _isFirstTimeInstall = YES;
         } else {
@@ -137,11 +137,11 @@ PYSingletonDefaultImplementation
         // Update version info.
         [NSKeyedArchiver
          archiveRootObject:_oldVersionInCache
-         toFile:[PYLIBRARYPATH stringByAppendingString:@"com.ipy.lastversion"]];
+         toFile:[PYLIBRARYPATH stringByAppendingPathComponent:@"com.ipy.lastversion"]];
         
         _deviceToken = [NSKeyedUnarchiver
                        unarchiveObjectWithFile:
-                       [PYLIBRARYPATH stringByAppendingString:@"com.ipy.devicetoken"]];
+                       [PYLIBRARYPATH stringByAppendingPathComponent:@"com.ipy.devicetoken"]];
 
         if ( _deviceToken == nil || [_deviceToken length] == 0 ) {
             _deviceToken = [@"" copy];
@@ -176,7 +176,7 @@ PYSingletonDefaultImplementation
     _deviceToken = [newToken copy];
     [NSKeyedArchiver
      archiveRootObject:_deviceToken
-     toFile:[PYLIBRARYPATH stringByAppendingString:@"com.ipy.devicetoken"]];
+     toFile:[PYLIBRARYPATH stringByAppendingPathComponent:@"com.ipy.devicetoken"]];
 }
 
 @end

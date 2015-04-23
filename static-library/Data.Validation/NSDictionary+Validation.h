@@ -87,7 +87,7 @@
 - (NSDate *)utcDateObjectForKey:(NSString *)key;
 /* Get an date object of millisecond, default should be 1970.1.1 00:00:00 */
 - (NSDate *)mDateObjectForKey:(NSString *)key;
-/* Get an date object of Nodejs style(basicly, when use sails, format should be yyyy-MM-ddTHH:mm:ss.SSSZ */
+/* Get an date object of javascript UTC style(basicly, when use sails, format should be yyyy-MM-ddTHH:mm:ss.SSSZ */
 - (NSDate *)jsDateObjectForKey:(NSString *)key;
 
 @end

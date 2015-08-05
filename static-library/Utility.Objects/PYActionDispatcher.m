@@ -48,7 +48,7 @@
 #include <objc/objc.h>
 #include <objc/runtime.h>
 
-static NSMutableDictionary      *_py_g_ad_event_map;
+static NSMutableDictionary      *_py_g_ad_event_map = nil;
 
 @implementation PYActionDispatcher
 
@@ -59,7 +59,9 @@ static NSMutableDictionary      *_py_g_ad_event_map;
 + (void)initialize
 {
     // Initialize the global map.
-    _py_g_ad_event_map = [NSMutableDictionary dictionary];
+    if ( _py_g_ad_event_map == nil ) {
+        _py_g_ad_event_map = [NSMutableDictionary dictionary];
+    }
 }
 
 - (id)init

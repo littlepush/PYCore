@@ -328,7 +328,7 @@
 - (id)endOfDay
 {
     NSUInteger _secondPass = _hour * 3600 + _minute * 60 + _second;
-    NSUInteger _timeLeft = 86400 - _secondPass;
+    NSUInteger _timeLeft = 86399 - _secondPass;
     return [PYDate dateWithTimestamp:(_timestamp + _timeLeft)];
 }
 

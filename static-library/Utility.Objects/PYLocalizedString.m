@@ -44,6 +44,7 @@
 #import "PYCoreMacro.h"
 #import "NSObject+PYCore.h"
 #import "NSArray+PYCore.h"
+#import <UIKit/UIKit.h>
 
 static PYLocalizedString *_gPYString = nil;
 
@@ -80,6 +81,9 @@ PYSingletonDefaultImplementation
     self = [super init];
     if ( self ) {
         _systemLanguage = [[NSLocale preferredLanguages] safeObjectAtIndex:0];
+        if ( [_systemLanguage rangeOfString:@"en"].location == 0 ) {
+            _systemLanguage = PYLanguageEnglish;
+        }
         if ( [_systemLanguage length] == 0 ) {
             _systemLanguage = PYLanguageEnglish;
         }

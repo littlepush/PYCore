@@ -76,6 +76,8 @@ typedef enum {
     PYiPhone5s                  = 0x00010008,
     PYiPhone6                   = 0x00010009,
     PYiPhone6P                  = 0x0001000A,
+    PYiPhone6s                  = 0x0001000B,
+    PYiPhone6sP                 = 0x0001000C,
     PYiPod1                     = 0x00020001,
     PYiPod2                     = 0x00020002,
     PYiPod3                     = 0x00020003,

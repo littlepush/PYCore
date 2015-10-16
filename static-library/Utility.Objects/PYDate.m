@@ -292,6 +292,20 @@
     NSDate *_theDate = [self nsDate];
     return [_fmt stringFromDate:_theDate];
 }
+- (NSString *)stringOfDate:(NSString *)format withTimeZone:(NSTimeZone *)timeZone
+{
+    NSDateFormatter *_fmt = __AUTO_RELEASE([[NSDateFormatter alloc] init]);
+    [_fmt setDateFormat:format];
+    [_fmt setTimeZone:timeZone];
+    NSDate *_theDate = [self nsDate];
+    return [_fmt stringFromDate:_theDate];
+}
+- (NSString *)jsDateString
+{
+    return [self stringOfDate:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                 withTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+}
+
 - (NSString *)timeIntervalStringFromNow
 {
 	//NSTimeInterval _interval = [NOWDATE timeIntervalSinceDate:date];

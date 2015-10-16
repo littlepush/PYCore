@@ -126,6 +126,8 @@ typedef enum {
 // Current date actions
 - (NSString *)stringOfDay;
 - (NSString *)stringOfDate:(NSString *)format;
+- (NSString *)stringOfDate:(NSString *)format withTimeZone:(NSTimeZone *)timeZone;
+- (NSString *)jsDateString;
 - (NSString *)timeIntervalStringFromNow;
 - (NSString *)timeIntervalStringFromDate:(PYDate *)date;
 - (NSInteger)timeIntervalSince:(PYDate *)date;

@@ -357,7 +357,9 @@ NSString *__currentDeviceModelName()
         case PYiPhone5c:        return @"iPhone5c";
         case PYiPhone5s:        return @"iPhone5s";
         case PYiPhone6:         return @"iPhone6";
-        case PYiPhone6P:        return @"iPhone6P";
+        case PYiPhone6P:        return @"iPhone6 Plus";
+        case PYiPhone6s:        return @"iPhone6s";
+        case PYiPhone6sP:       return @"iPhone6s Plus";
         case PYiPod1:           return @"iPod1";
         case PYiPod2:           return @"iPod2";
         case PYiPod3:           return @"iPod3";
@@ -434,6 +436,12 @@ PYDeviceModel __getDeviceModel()
     }
     else if ([modelName isEqualToString:@"iPhone7,1"] ) {
         _model = PYiPhone6P;
+    }
+    else if ([modelName isEqualToString:@"iPhone8,1"] ) {
+        _model = PYiPhone6s;
+    }
+    else if ([modelName isEqualToString:@"iPhone8,2"] ) {
+        _model = PYiPhone6sP;
     }
     else if([modelName rangeOfString:@"iPod1,"].location != NSNotFound ) {
         //modelName = @"iPod 1st Gen";

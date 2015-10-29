@@ -81,8 +81,11 @@ PYSingletonDefaultImplementation
     self = [super init];
     if ( self ) {
         _systemLanguage = [[NSLocale preferredLanguages] safeObjectAtIndex:0];
-        if ( [_systemLanguage rangeOfString:@"en"].location == 0 ) {
+        if ( [_systemLanguage rangeOfString:PYLanguageEnglish].location == 0 ) {
             _systemLanguage = PYLanguageEnglish;
+        }
+        if ( [_systemLanguage rangeOfString:PYLanguageChineseSimplified].location == 0 ) {
+            _systemLanguage = PYLanguageChineseSimplified;
         }
         if ( [_systemLanguage length] == 0 ) {
             _systemLanguage = PYLanguageEnglish;

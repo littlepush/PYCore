@@ -38,6 +38,7 @@
 		E64EB6B9176583F7009294FE /* PYMerger.m in Sources */ = {isa = PBXBuildFile; fileRef = E64EB6B7176583F6009294FE /* PYMerger.m */; };
 		E64F409C17088CEF0037BB6B /* NSObject+PYCore.h in Headers */ = {isa = PBXBuildFile; fileRef = E64F409A17088CEF0037BB6B /* NSObject+PYCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E64F409D17088CEF0037BB6B /* NSObject+PYCore.m in Sources */ = {isa = PBXBuildFile; fileRef = E64F409B17088CEF0037BB6B /* NSObject+PYCore.m */; };
+		E66A09571EB1F2E90065E286 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = E66A09561EB1F2E90065E286 /* README.md */; };
 		E66E463717A2468E00D1FF55 /* PYPair.h in Headers */ = {isa = PBXBuildFile; fileRef = E66E463517A2468E00D1FF55 /* PYPair.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E66E463817A2468E00D1FF55 /* PYPair.m in Sources */ = {isa = PBXBuildFile; fileRef = E66E463617A2468E00D1FF55 /* PYPair.m */; };
 		E66F1DB0198A3D10004F08A2 /* PYKernel.h in Headers */ = {isa = PBXBuildFile; fileRef = E66F1DAE198A3D10004F08A2 /* PYKernel.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -82,6 +83,7 @@
 		E64F409A17088CEF0037BB6B /* NSObject+PYCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PYCore.h"; sourceTree = "<group>"; };
 		E64F409B17088CEF0037BB6B /* NSObject+PYCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PYCore.m"; sourceTree = "<group>"; };
 		E66A09551EB1D7A90065E286 /* devicelist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = devicelist.json; sourceTree = "<group>"; };
+		E66A09561EB1F2E90065E286 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E66E463517A2468E00D1FF55 /* PYPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYPair.h; sourceTree = "<group>"; };
 		E66E463617A2468E00D1FF55 /* PYPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYPair.m; sourceTree = "<group>"; };
 		E66E463E17A251D900D1FF55 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -184,6 +186,7 @@
 		E6AE341E15B1896000AFBA96 = {
 			isa = PBXGroup;
 			children = (
+				E66A09561EB1F2E90065E286 /* README.md */,
 				E6AE344D15B1897300AFBA96 /* static-library */,
 				E6D57EE015F5A6DB00C1ED25 /* PYCore */,
 				E6AE342C15B1896100AFBA96 /* Frameworks */,
@@ -336,6 +339,7 @@
 				E64EB6AD1764F6D0009294FE /* NSDictionary+Validation.m in Sources */,
 				E64EB6B11764F71B009294FE /* NSString+Validation.m in Sources */,
 				E64EB6B9176583F7009294FE /* PYMerger.m in Sources */,
+				E66A09571EB1F2E90065E286 /* README.md in Sources */,
 				E64A8FAE17BB2B6600B132BA /* PYKVOObject.m in Sources */,
 				E632EB6218B5D943003BF129 /* PYActionDispatcher.m in Sources */,
 				E644D4321767A6CC00DFEA20 /* PYMutex.m in Sources */,

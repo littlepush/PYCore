@@ -41,10 +41,6 @@
  */
 
 #import <Foundation/Foundation.h>
-#include <stdio.h>
-#include <string.h>
-#include <assert.h>
-#include <zlib.h>
 
 @interface PYEncoder : NSObject
 

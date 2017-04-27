@@ -43,6 +43,10 @@
 #import "PYEncoder.h"
 #import "NSObject+PYCore.h"
 #import <CommonCrypto/CommonDigest.h>
+#include <stdio.h>
+#include <string.h>
+#include <assert.h>
+#include <zlib.h>
 
 @implementation PYEncoder
 // Base64 Coder of data

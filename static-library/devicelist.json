@@ -1,0 +1,337 @@
+{
+    [
+        "name": "Apple Watch-1stGen(38mm)",
+        "identifier": "Watch1,1",
+        "device": "AppleWatch"
+    ],
+    [
+        "name": "Apple Watch-1stGen(42mm)",
+        "identifier": "Watch1,2",
+        "device": "AppleWatch"
+    ],
+    [
+        "name": "Apple Watch-2ndGen-Series1(38mm)",
+        "identifier": "Watch2,6",
+        "device": "AppleWatch"
+    ],
+    [
+        "name": "Apple Watch-2ndGen-Series1(42mm)",
+        "identifier": "Watch2,7",
+        "device": "AppleWatch"
+    ],
+    [
+        "name": "Apple Watch-2ndGen-Series2(38mm)",
+        "identifier": "Watch2,3",
+        "device": "AppleWatch"
+    ],
+    [
+        "name": "Apple Watch-2ndGen-Series2(42mm)",
+        "identifier": "Watch2,4",
+        "device": "AppleWatch"
+    ],
+    [
+        "name": "iPad",
+        "identifier": "iPad1,1",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad 2(WIFI)",
+        "identifier": "iPad2,1",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad 2(GSM)",
+        "identifier": "iPad2,2",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad 2(CDMA)",
+        "identifier": "iPad2,3",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad 2(WIFI)",
+        "identifier": "iPad2,4",
+        "device": "iPad"
+    ],
+    [
+        "name": "new iPad-3rdGen(WIFI)",
+        "identifier": "iPad3,1",
+        "device": "iPad"
+    ],
+    [
+        "name": "new iPad-3rdGen(GSM)",
+        "identifier": "iPad3,2",
+        "device": "iPad"
+    ],
+    [
+        "name": "new iPad-3rdGen(CDMA)",
+        "identifier": "iPad3,3",
+        "device": "iPad"
+    ],
+    [
+        "name": "new iPad-4thGen(WIFI)",
+        "identifier": "iPad3,4",
+        "device": "iPad"
+    ],
+    [
+        "name": "new iPad-4thGen(GSM)",
+        "identifier": "iPad3,5",
+        "device": "iPad"
+    ],
+    [
+        "name": "new iPad-4thGen(CDMA)",
+        "identifier": "iPad3,6",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad-5thGen(WIFI)",
+        "identifier": "iPad6,11",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad-5thGen(WIFI+Cellular",
+        "identifier": "iPad6,12",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad Air(WIFI)",
+        "identifier": "iPad4,1",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad Air(GSM)",
+        "identifier": "iPad4,2",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad Air(CDMA)",
+        "identifier": "iPad4,3",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad Air 2(WIFI)",
+        "identifier": "iPad5,3",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad Air 2(WIFI+Cellular)",
+        "identifier": "iPad5,4",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad Pro-12.9inch(WIFI)",
+        "identifier": "iPad6,7",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad Pro-12.9inch(WIFI+Cellular)",
+        "identifier": "iPad6,8",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad Pro-9.7inch(WIFI)",
+        "identifier": "iPad6,3",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad Pro-9.7inch(WIFI+Cellular)",
+        "identifier": "iPad6,4",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad Mini 1(WIFI)",
+        "identifier": "iPad2,5",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad Mini 1(GSM)",
+        "identifier": "iPad2,6",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad Mini 1(CDMA)",
+        "identifier": "iPad2,7",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad Mini Retina(WIFI)",
+        "identifier": "iPad4,4",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad Mini Retina(GSM)",
+        "identifier": "iPad4,5",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad Mini Retina(CDMA)",
+        "identifier": "iPad4,6",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad Mini-3rdGen(WIFI)",
+        "identifier": "iPad4,7",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad Mini-3rdGen(GSM)",
+        "identifier": "iPad4,8",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad Mini-3rdGen(CDMA)",
+        "identifier": "iPad4,9",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad Mini-4thGen(WIFI)",
+        "identifier": "iPad5,1",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPad Mini-4thGen(WIFI+Cellular)",
+        "identifier": "iPad5,2",
+        "device": "iPad"
+    ],
+    [
+        "name": "iPod touch-1stGen",
+        "identifier": "iPod1,1",
+        "device": "iPod"
+    ],
+    [
+        "name": "iPod touch-2ndGen",
+        "identifier": "iPod2,1",
+        "device": "iPod"
+    ],
+    [
+        "name": "iPod touch-3rdGen",
+        "identifier": "iPod3,1",
+        "device": "iPod"
+    ],
+    [
+        "name": "iPod touch-4thGen",
+        "identifier": "iPod4,1",
+        "device": "iPod"
+    ],
+    [
+        "name": "iPod touch-5thGen",
+        "identifier": "iPod5,1",
+        "device": "iPod"
+    ],
+    [
+        "name": "iPod touch-6thGen",
+        "identifier": "iPod7,1",
+        "device": "iPod"
+    ],
+    [
+        "name": "iPhone",
+        "identifier": "iPhone1,1",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone3G",
+        "identifier": "iPhone1,2",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone3GS",
+        "idnetifier": "iPhone2,1",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone4",
+        "identifier": "iPhone3,1",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone4-8G",
+        "identifier": "iPhone3,2",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone4-(noSIM)",
+        "identifier": "iPhone3,3",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone4S",
+        "identifier": "iPhone4,1",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone5(T-Mobile)",
+        "identifier": "iPhone5,1",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone5",
+        "identifier": "iPhone5,2",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone5c",
+        "identifier": "iPhone5,3",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone5c",
+        "identifier": "iPhone5,4",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone5s",
+        "identifier": "iPhone6,1",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone5s",
+        "identifier": "iPhone6,2",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone6",
+        "identifier": "iPhone7,2",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone6 Plus",
+        "identifier": "iPhone7,1",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone6s",
+        "identifier": "iPhone8,1",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone6s Plus",
+        "identifier": "iPhone8,2",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone SE",
+        "identifier": "iPhone8,4",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone7",
+        "identifier": "iPhone9,1",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone7(SIM-Free)",
+        "identifier": "iPhone9,3",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone7 Plus",
+        "identifier": "iPhone9,2",
+        "device": "iPhone"
+    ],
+    [
+        "name": "iPhone7 Plus(SIM-Free)",
+        "identifier": "iPhone9,4",
+        "device": "iPhone"
+    ]
+}

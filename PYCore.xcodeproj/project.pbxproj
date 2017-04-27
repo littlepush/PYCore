@@ -81,6 +81,7 @@
 		E64EB6B7176583F6009294FE /* PYMerger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYMerger.m; sourceTree = "<group>"; };
 		E64F409A17088CEF0037BB6B /* NSObject+PYCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PYCore.h"; sourceTree = "<group>"; };
 		E64F409B17088CEF0037BB6B /* NSObject+PYCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PYCore.m"; sourceTree = "<group>"; };
+		E66A09551EB1D7A90065E286 /* devicelist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = devicelist.json; sourceTree = "<group>"; };
 		E66E463517A2468E00D1FF55 /* PYPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYPair.h; sourceTree = "<group>"; };
 		E66E463617A2468E00D1FF55 /* PYPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYPair.m; sourceTree = "<group>"; };
 		E66E463E17A251D900D1FF55 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -219,6 +220,7 @@
 				E64EB6A01764F39F009294FE /* PYCore.h */,
 				E64EB6A11764F3A1009294FE /* PYCore.m */,
 				E64EB6A41764F3BC009294FE /* PYCoreMacro.h */,
+				E66A09551EB1D7A90065E286 /* devicelist.json */,
 			);
 			path = "static-library";
 			sourceTree = "<group>";

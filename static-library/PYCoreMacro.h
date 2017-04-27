@@ -64,46 +64,6 @@ static const int __pybitorder[32] = {
 #define PYLAST1INDEX(x)     (__pybitorder[((unsigned int)(((x) & -(x)) * 0x04653ADFU)) >> 27])
 
 typedef enum {
-    PYiDeviceUnknow             = 0x00000000,
-    PYiPhoneSimulator           = 0x00000001,
-    PYiPhone                    = 0x00010001,
-    PYiPhone3G                  = 0x00010002,
-    PYiPhone3GS                 = 0x00010003,
-    PYiPhone4                   = 0x00010004,
-    PYiPhone4S                  = 0x00010005,
-    PYiPhone5                   = 0x00010006,
-    PYiPhone5c                  = 0x00010007,
-    PYiPhone5s                  = 0x00010008,
-    PYiPhone6                   = 0x00010009,
-    PYiPhone6P                  = 0x0001000A,
-    PYiPhone6s                  = 0x0001000B,
-    PYiPhone6sP                 = 0x0001000C,
-    PYiPod1                     = 0x00020001,
-    PYiPod2                     = 0x00020002,
-    PYiPod3                     = 0x00020003,
-    PYiPod4                     = 0x00020004,
-    PYiPod5                     = 0x00020005,
-    PYiPad1Gen                  = 0x00031001,
-    PYiPad2Wifi                 = 0x00032000,
-    PYiPad2CDMA                 = 0x00032001,
-    PYiPad2GSM                  = 0x00032002,
-    PYiPad3Wifi                 = 0x00033000,
-    PYiPad3CDMA                 = 0x00033001,
-    PYiPad3GSM                  = 0x00033002,
-    PYiPad4Wifi                 = 0x00034000,
-    PYiPad4CDMA                 = 0x00034001,
-    PYiPad4GSM                  = 0x00034002,
-    PYiPadMini1Wifi             = 0x00041000,
-    PYiPadMini1GSM              = 0x00041001,
-    PYiPadMiniRetinaWifi        = 0x00042000,
-    PYiPadMiniRetinaGSM         = 0x00042001,
-    PYiPadMini3                 = 0x00042002,
-    PYiPadAirWifi               = 0x00051000,
-    PYiPadAirGSM                = 0x00051001,
-    PYiPadAir2                  = 0x00051002,
-} PYDeviceModel;
-
-typedef enum {
     PYByte                      = 1,
     PYKiloByte                  = 1024 * PYByte,
     PYMegaByte                  = 1024 * PYKiloByte,
@@ -202,13 +162,13 @@ extern "C" {
      */
     NSString *__getMACAddress();
     /*
-     Get current device's model.
-     */
-    PYDeviceModel __currentDeviceModel();
-    /*
      Get current device's model name.
      */
     NSString *__currentDeviceModelName();
+    /*
+     Get current device's display name.
+     */
+    NSString *__currentDeviceName();
     /*
      Get free space of current device.
      */
@@ -245,11 +205,11 @@ extern "C" {
 #define PYFREESPACE         (__getFreeSpace())
 #define PYISJAILBROKEN      (__isJailBroken())
 #define PYMACADDRESS        (__getMACAddress())
-#define PYDEVICEMODEL       (__currentDeviceModel())
-#define PYDEVICEMODELNAME   (__currentDeviceModelName())
 #define PYHUMANSIZE(b)      (__bytesToHumanReadableString(b))
 #define PYSKIPICLOUD(f)     (__skipFileFromiCloudBackup([NSURL fileURLWithPath:(f)]))
 #define PYCLEANCONSOLE      (__iOS7B5CleanConsoleOutput())
+#define PYDEVICEMODELNAME   (__currentDeviceModelName())
+#define PYDEVICENAME        (__currentDeviceName())
 
 #ifdef DEBUG
 #    define PYLog(f, ...)	__formatLogLine(__FILE__, __FUNCTION__, __LINE__,               \

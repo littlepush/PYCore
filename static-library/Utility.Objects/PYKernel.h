@@ -41,7 +41,11 @@
 }
 
 // Phone Type: iphone
-@property (nonatomic, readonly) NSString                *phoneType;
+@property (nonatomic, readonly) NSString                *phoneType  __deprecated_msg("use deviceType instead");
+// Device Type
+@property (nonatomic, readonly) NSString                *deviceType;
+// Device Name
+@property (nonatomic, readonly) NSString                *deviceName;
 // Device: MD5 of first MAC Address
 @property (nonatomic, readonly) NSString                *deviceId;
 // Version in Bundle.

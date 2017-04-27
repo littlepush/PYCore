@@ -60,11 +60,6 @@
 
 #define PYCORE_TIME_FORMAT_BASIC	@"%04d-%02d-%02d %02d:%02d:%02d,%03d"
 
-/*
- Get current device's model.
- */
-PYDeviceModel __getDeviceModel();
-
 // Get current time in simple format
 NSString * __getCurrentFormatDate()
 {
@@ -333,203 +328,73 @@ NSString *__getMACAddress()
     return _mac;
 }
 
-PYDeviceModel __currentDeviceModel()
-{
-    static PYDeviceModel _deviceModel = PYiDeviceUnknow;
-    if ( _deviceModel == PYiDeviceUnknow ) {
-        _deviceModel = __getDeviceModel();
-    }
-    return _deviceModel;
-}
-
-NSString *__currentDeviceModelName()
-{
-    PYDeviceModel _model = __currentDeviceModel();
-    switch (_model) {
-        case PYiDeviceUnknow:   return @"Unknow";
-        case PYiPhoneSimulator: return @"Simulator";
-        case PYiPhone:          return @"iPhone";
-        case PYiPhone3G:        return @"iPhone3G";
-        case PYiPhone3GS:       return @"iPhone3GS";
-        case PYiPhone4:         return @"iPhone4";
-        case PYiPhone4S:        return @"iPhone4S";
-        case PYiPhone5:         return @"iPhone5";
-        case PYiPhone5c:        return @"iPhone5c";
-        case PYiPhone5s:        return @"iPhone5s";
-        case PYiPhone6:         return @"iPhone6";
-        case PYiPhone6P:        return @"iPhone6 Plus";
-        case PYiPhone6s:        return @"iPhone6s";
-        case PYiPhone6sP:       return @"iPhone6s Plus";
-        case PYiPod1:           return @"iPod1";
-        case PYiPod2:           return @"iPod2";
-        case PYiPod3:           return @"iPod3";
-        case PYiPod4:           return @"iPod4";
-        case PYiPod5:           return @"iPod5";
-        case PYiPad1Gen:        return @"iPad1 Gen";
-        case PYiPad2Wifi:       return @"iPad2 Wifi";
-        case PYiPad2CDMA:       return @"iPad2 CDMA";
-        case PYiPad2GSM:        return @"iPad2 GSM";
-        case PYiPad3Wifi:       return @"iPad3 Wifi";
-        case PYiPad3CDMA:       return @"iPad3 CDMA";
-        case PYiPad3GSM:        return @"iPad3 GSM";
-        case PYiPad4Wifi:       return @"iPad4 Wifi";
-        case PYiPad4CDMA:       return @"iPad4 CDMA";
-        case PYiPad4GSM:        return @"iPad4 GSM";
-        case PYiPadMini1Wifi:   return @"iPad Mini1 Wifi";
-        case PYiPadMini1GSM:    return @"iPad Mini1 GSM";
-        case PYiPadMiniRetinaWifi: return @"iPad Mini Retina Wifi";
-        case PYiPadMiniRetinaGSM: return @"iPad Mini Retina GSM";
-        case PYiPadMini3:       return @"iPad Mini 3";
-        case PYiPadAirWifi:     return @"iPad Air Wifi";
-        case PYiPadAirGSM:      return @"iPad Air GSM";
-        case PYiPadAir2:        return @"iPad Air 2";
-    };
-    return @"Unknow";
-}
-
-PYDeviceModel __getDeviceModel()
+NSString *__getDeviceModal()
 {
     struct utsname systemInfo;
     uname(&systemInfo);
-    NSString *modelName = [NSString stringWithCString:systemInfo.machine
-                                             encoding:NSUTF8StringEncoding];
-    PYDeviceModel _model = PYiDeviceUnknow;
+    return [NSString stringWithCString:systemInfo.machine
+                              encoding:NSUTF8StringEncoding];
+}
+
+NSData *__reloadDeviceList()
+{
+    NSData *_deviceData = [NSData dataWithContentsOfURL:
+                           [NSURL URLWithString:
+                            @"https://raw.githubusercontent.com/littlepush/PYCore/master/static-library/devicelist.json"]];
+    [_deviceData writeToFile:[PYDOCUMENTPATH stringByAppendingPathComponent:@"devicelist.json"]
+                  atomically:YES];
+    return _deviceData;
     
-    if([modelName isEqualToString:@"i386"] || [modelName isEqualToString:@"x86_64"]) {
-        _model = PYiPhoneSimulator;
+}
+
+NSDictionary *__initDeviceCache() {
+    static NSDictionary *_dcache = nil;
+    if ( _dcache == nil ) {
+        NSFileManager* _fm = [NSFileManager defaultManager];
+        NSString *_localFile = [PYDOCUMENTPATH stringByAppendingPathComponent:@"devicelist.json"];
+        NSData *_localData = nil;
+        
+        if ( ![_fm fileExistsAtPath:_localFile] ) {
+            // Read from bundle
+            _localFile = [[NSBundle mainBundle] pathForResource:@"devicelist" ofType:@"json"];
+        }
+        
+        _localData = [NSData dataWithContentsOfFile:_localFile];
+        NSError *_error = nil;
+        id _dlist = [NSJSONSerialization
+                     JSONObjectWithData:_localData
+                     options:NSJSONReadingAllowFragments
+                     error:&_error];
+        if ( _error == nil ) {
+            _dcache = [NSDictionary object];
+            for ( NSDictionary *_dinfo in _dlist ) {
+                [_dcache setValue:_dinfo forKey:[_dinfo stringObjectForKey:@"identifier"]];
+            }
+        }
+        // Async to update the device list
+        BEGIN_ASYNC_INVOKE
+        __reloadDeviceList();
+        END_ASYNC_INVOKE
     }
-    else if([modelName isEqualToString:@"iPhone1,1"]) {
-        _model = PYiPhone;
-    }
-    else if([modelName isEqualToString:@"iPhone1,2"]) {
-        //modelName = @"iPhone 3G";
-        _model = PYiPhone3G;
-    }
-    else if([modelName isEqualToString:@"iPhone2,1"]) {
-        //modelName = @"iPhone 3GS";
-        _model = PYiPhone3GS;
-    }
-    else if([modelName isEqualToString:@"iPhone3,1"]) {
-        //modelName = @"iPhone 4";
-        _model = PYiPhone4;
-    }
-    else if([modelName rangeOfString:@"iPhone4,"].location != NSNotFound ) {
-        //modelName = @"iPhone 4S";
-        _model = PYiPhone4S;
-    }
-    else if([modelName rangeOfString:@"iPhone5,1"].location != NSNotFound ||
-            [modelName rangeOfString:@"iPhone5,2"].location != NSNotFound) {
-        //modelName = @"iPhone 5";
-        _model = PYiPhone5;
-    }
-    else if ([modelName rangeOfString:@"iPhone5,3"].location != NSNotFound ||
-             [modelName rangeOfString:@"iPhone5,4"].location != NSNotFound) {
-        //modelName = @"iPhone 5c"
-        _model = PYiPhone5c;
-    }
-    else if ([modelName rangeOfString:@"iPhone6,"].location != NSNotFound) {
-        //modelName = @"iPhone 5s"
-        _model = PYiPhone5s;
-    }
-    else if ([modelName isEqualToString:@"iPhone7,2"] ) {
-        _model = PYiPhone6;
-    }
-    else if ([modelName isEqualToString:@"iPhone7,1"] ) {
-        _model = PYiPhone6P;
-    }
-    else if ([modelName isEqualToString:@"iPhone8,1"] ) {
-        _model = PYiPhone6s;
-    }
-    else if ([modelName isEqualToString:@"iPhone8,2"] ) {
-        _model = PYiPhone6sP;
-    }
-    else if([modelName rangeOfString:@"iPod1,"].location != NSNotFound ) {
-        //modelName = @"iPod 1st Gen";
-        _model = PYiPod1;
-    }
-    else if([modelName rangeOfString:@"iPod2,"].location != NSNotFound ) {
-        //modelName = @"iPod 2nd Gen";
-        _model = PYiPod2;
-    }
-    else if([modelName rangeOfString:@"iPod3,"].location != NSNotFound ) {
-        //modelName = @"iPod 3rd Gen";
-        _model = PYiPod3;
-    }
-    else if([modelName rangeOfString:@"iPod4,"].location != NSNotFound ) {
-        _model = PYiPod4;
-    }
-    else if([modelName rangeOfString:@"iPod5,"].location != NSNotFound ) {
-        _model = PYiPod5;
-    }
-    else if([modelName isEqualToString:@"iPad1,1"]) {
-        //modelName = @"iPad";
-        _model = PYiPad1Gen;
-    }
-    else if([modelName isEqualToString:@"iPad2,1"] || [modelName isEqualToString:@"iPad2,4"]) {
-        //modelName = @"iPad 2(WiFi)";
-        _model = PYiPad2Wifi;
-    }
-    else if([modelName isEqualToString:@"iPad2,2"]) {
-        //modelName = @"iPad 2(GSM)";
-        _model = PYiPad2GSM;
-    }
-    else if([modelName isEqualToString:@"iPad2,3"]) {
-        //modelName = @"iPad 2(CDMA)";
-        _model = PYiPad2CDMA;
-    }
-    else if([modelName isEqualToString:@"iPad2,5"]) {
-        _model = PYiPadMini1Wifi;
-    }
-    else if([modelName isEqualToString:@"iPad2,6"]) {
-        _model = PYiPadMini1GSM;
-    }
-    else if([modelName isEqualToString:@"iPad3,1"]) {
-        //modelName = @"iPad 3(WiFi)";
-        _model = PYiPad3Wifi;
-    }
-    else if([modelName isEqualToString:@"iPad3,2"]) {
-        //modelName = @"iPad 3(GSM)";
-        _model = PYiPad3GSM;
-    }
-    else if([modelName isEqualToString:@"iPad3,3"]) {
-        //modelName = @"iPad 3(CDMA)";
-        _model = PYiPad3CDMA;
-    }
-    else if([modelName isEqualToString:@"iPad3,4"]) {
-        //modelName = @"iPad 4(WiFi)";
-        _model = PYiPad4Wifi;
-    }
-    else if([modelName isEqualToString:@"iPad3,5"]) {
-        //modelName = @"iPad 4(GSM)";
-        _model = PYiPad4GSM;
-    }
-    else if([modelName isEqualToString:@"iPad3,6"]) {
-        //modelName = @"iPad 4(CDMA)";
-        _model = PYiPad4CDMA;
-    }
-    else if([modelName isEqualToString:@"iPad4,4"]) {
-        _model = PYiPadMiniRetinaWifi;
-    }
-    else if([modelName isEqualToString:@"iPad4,5"]) {
-        _model = PYiPadMiniRetinaGSM;
-    }
-    else if([modelName isEqualToString:@"iPad4,1"]) {
-        _model = PYiPadAirWifi;
-    }
-    else if([modelName isEqualToString:@"iPad4,2"]) {
-        _model = PYiPadAirGSM;
-    }
-    else if ([modelName isEqualToString:@"iPad4,7"] ||
-             [modelName isEqualToString:@"iPad4,8"] ||
-             [modelName isEqualToString:@"iPad4,9"] ) {
-        _model = PYiPadMini3;
-    }
-    else if ([modelName isEqualToString:@"iPad5,3"] ||
-             [modelName isEqualToString:@"iPad5,4"] ) {
-        _model = PYiPadAir2;
-    }
-    
-    return _model;
+    return _dcache;
+}
+/*
+ Get current device's model name.
+ */
+NSString *__currentDeviceModelName() {
+    NSDictionary *_dcache = __initDeviceCache();
+    id _dinfo = [_dcache objectForKey:__getDeviceModal()];
+    if ( _dinfo == nil ) return @"UnKnow Device";
+    return [_dinfo stringObjectForKey:@"device"];
+}
+/*
+ Get current device's display name.
+ */
+NSString *__currentDeviceName() {
+    NSDictionary *_dcache = __initDeviceCache();
+    id _dinfo = [_dcache objectForKey:__getDeviceModal()];
+    if ( _dinfo == nil ) return @"UnKnow Device";
+    return [_dinfo stringObjectForKey:@"name"];
 }
 
 unsigned long long __getFreeSpace()

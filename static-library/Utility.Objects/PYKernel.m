@@ -60,6 +60,16 @@ PYSingletonDefaultImplementation
     // The phone type of this app should be iphone.
     return PYDEVICEMODELNAME;
 }
+@dynamic deviceType;
+- (NSString *)deviceType
+{
+    return PYDEVICEMODELNAME;
+}
+@dynamic deviceName;
+- (NSString *)deviceName
+{
+    return PYDEVICENAME;
+}
 @synthesize bundleId = _bundleId;
 @synthesize deviceToken = _deviceToken;
 @synthesize productName = _productName;

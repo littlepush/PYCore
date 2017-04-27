@@ -1,5 +1,15 @@
 [
     {
+        "name": "Simulator",
+        "identifier": "i386",
+        "device": "Simulator"
+    },
+    {
+        "name": "Simulator",
+        "identifier": "x86_64",
+        "device": "Simulator"
+    },
+    {
         "name": "Apple Watch-1stGen(38mm)",
         "identifier": "Watch1,1",
         "device": "AppleWatch"

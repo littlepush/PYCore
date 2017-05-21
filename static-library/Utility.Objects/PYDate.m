@@ -122,7 +122,7 @@
     _minute = _dateComponents.minute;
     _second = _dateComponents.second;
     _millisecond = _dateComponents.nanosecond / 1000;
-    _timestamp = (NSUInteger)[date timeIntervalSince1970];
+    _timestamp = [date timeIntervalSince1970];
 }
 
 + (void)initialize
@@ -192,7 +192,7 @@
 // From an NSDate
 + (id)dateWithDate:(NSDate *)date
 {
-    return [PYDate dateWithTimestamp:(NSUInteger)[date timeIntervalSince1970]];
+    return [PYDate dateWithTimestamp:[date timeIntervalSince1970]];
 }
 // Date from string, default format "YYYY-MM-DD HH:mm"
 + (id)dateWithString:(NSString *)dateString

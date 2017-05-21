@@ -121,7 +121,7 @@
     _hour = _dateComponents.hour;
     _minute = _dateComponents.minute;
     _second = _dateComponents.second;
-    _millisecond = _dateComponents.nanosecond / 1000;
+    _millisecond = _dateComponents.nanosecond / 1000000;
     _timestamp = [date timeIntervalSince1970];
 }
 

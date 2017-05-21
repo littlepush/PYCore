@@ -44,6 +44,22 @@
 #import "PYLocalizedString.h"
 #import "NSObject+PYCore.h"
 
+@interface PYDate ()
+{
+    NSUInteger                  _year;
+    NSUInteger                  _month;
+    NSUInteger                  _day;
+    PYWeekDay                   _weekday;
+    NSUInteger                  _hour;
+    NSUInteger                  _minute;
+    NSUInteger                  _second;
+    NSUInteger                  _millisecond;
+    
+    double                      _timestamp;
+}
+
+@end
+
 @implementation PYDate
 
 // Properties
@@ -81,6 +97,7 @@
                             NSCalendarUnitHour |
                             NSCalendarUnitMinute |
                             NSCalendarUnitSecond |
+                            NSCalendarUnitNanosecond |
                             NSCalendarUnitTimeZone);
 #else
     NSCalendar *calendar = __AUTO_RELEASE([[NSCalendar alloc]
@@ -104,6 +121,7 @@
     _hour = _dateComponents.hour;
     _minute = _dateComponents.minute;
     _second = _dateComponents.second;
+    _millisecond = _dateComponents.nanosecond / 1000;
     _timestamp = (NSUInteger)[date timeIntervalSince1970];
 }
 
@@ -167,7 +185,7 @@
     return [PYDate object];
 }
 // Specified date
-+ (id)dateWithTimestamp:(NSUInteger)timestamp
++ (id)dateWithTimestamp:(double)timestamp
 {
     return __AUTO_RELEASE([[PYDate alloc] initWithTimestamp:timestamp]);
 }
@@ -213,7 +231,7 @@
     }
     return self;
 }
-- (id)initWithTimestamp:(NSUInteger)timestamp
+- (id)initWithTimestamp:(double)timestamp
 {
     self = [super init];
     if ( self ) {
@@ -258,7 +276,7 @@
 }
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    [aCoder encodeInteger:(NSInteger)_timestamp forKey:@"PYDateTimeStamp"];
+    [aCoder encodeDouble:_timestamp forKey:@"PYDateTimeStamp"];
 }
 
 - (id)copy
@@ -313,23 +331,23 @@
 }
 - (NSString *)timeIntervalStringFromDate:(PYDate *)date
 {
-    NSInteger _interval = date.timestamp - _timestamp;
-	if ( _interval < 0 ) return [PYLocalizedString stringForKey:@"RIGHTNOW"];
-	if ( _interval < 60 ) return
+    double _interval = date.timestamp - _timestamp;
+	if ( _interval < 0.f ) return [PYLocalizedString stringForKey:@"RIGHTNOW"];
+	if ( _interval < 60.f ) return
         [NSString stringWithFormat:[PYLocalizedString stringForKey:@"SECONDS_AGO"],
          (int)_interval];
-	if ( _interval < 3600 ) return
+	if ( _interval < 3600.f ) return
         [NSString stringWithFormat:[PYLocalizedString stringForKey:@"MINUTS_AGO"],
          ((int)_interval) / 60];
-	if ( _interval < 86400 ) return
+	if ( _interval < 86400.f ) return
         [NSString stringWithFormat:[PYLocalizedString stringForKey:@"HOUR_AGO"],
          ((int)_interval) / 3600];
-	if ( _interval < 604800 ) return
+	if ( _interval < 604800.f ) return
         [NSString stringWithFormat:[PYLocalizedString stringForKey:@"DAY_AGO"],
          ((int)_interval) / 86400];
 	return [self stringOfDay];
 }
-- (NSInteger)timeIntervalSince:(PYDate *)date
+- (double)timeIntervalSince:(PYDate *)date
 {
     return _timestamp - date.timestamp;
 }
@@ -337,7 +355,7 @@
 {
     NSUInteger _secondPass = _hour * 3600 + _minute * 60 + _second;
     NSUInteger _beginTimeStamp = _timestamp - _secondPass;
-    return [PYDate dateWithTimestamp:_beginTimeStamp];
+    return [PYDate dateWithTimestamp:(double)_beginTimeStamp];
 }
 - (id)endOfDay
 {
@@ -411,7 +429,7 @@
 
 - (BOOL)isExpiredFromNow
 {
-    if ( _timestamp == -1 ) return NO;
+    if ( _timestamp == -1.f ) return NO;
     time_t _t = time(NULL);
     return _timestamp <= _t;
 }

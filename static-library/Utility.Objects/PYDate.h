@@ -64,13 +64,13 @@ typedef enum {
 @property (nonatomic, readonly) NSUInteger          minute;
 @property (nonatomic, readonly) NSUInteger          second;
 // The timestamp property.
-@property (nonatomic, readonly) long                timestamp;
+@property (nonatomic, readonly) double              timestamp;
 
 // Initialize functions
 // Now date
 + (id)date;
 // Specified date
-+ (id)dateWithTimestamp:(NSUInteger)timestamp;
++ (id)dateWithTimestamp:(double)timestamp;
 // From an NSDate
 + (id)dateWithDate:(NSDate *)date;
 // Date from string, default format "yyyy-MM-dd HH:mm:ss"
@@ -95,18 +95,6 @@ typedef enum {
 @end
 
 @interface PYDate : NSObject<PYDate, NSCoding, NSCopying>
-{
-    NSUInteger                  _year;
-    NSUInteger                  _month;
-    NSUInteger                  _day;
-    PYWeekDay                   _weekday;
-    NSUInteger                  _hour;
-    NSUInteger                  _minute;
-    NSUInteger                  _second;
-    NSUInteger                  _millisecond;
-    
-    long                        _timestamp;
-}
 
 // Date Creater
 // Get the weekday name
@@ -117,7 +105,7 @@ typedef enum {
 
 // Instance
 - (id)initWithDate:(PYDate *)date;
-- (id)initWithTimestamp:(NSUInteger)timestamp;
+- (id)initWithTimestamp:(double)timestamp;
 - (id)initWithString:(NSString *)dateString format:(NSString *)format;
 
 // Convert to NSDate
@@ -130,7 +118,7 @@ typedef enum {
 - (NSString *)jsDateString;
 - (NSString *)timeIntervalStringFromNow;
 - (NSString *)timeIntervalStringFromDate:(PYDate *)date;
-- (NSInteger)timeIntervalSince:(PYDate *)date;
+- (double)timeIntervalSince:(PYDate *)date;
 
 //
 // Expire Checking

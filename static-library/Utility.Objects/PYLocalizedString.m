@@ -84,9 +84,25 @@ PYSingletonDefaultImplementation
         if ( [_systemLanguage rangeOfString:PYLanguageEnglish].location == 0 ) {
             _systemLanguage = PYLanguageEnglish;
         }
-        if ( [_systemLanguage rangeOfString:PYLanguageChineseSimplified].location == 0 ) {
+        else if ( [_systemLanguage rangeOfString:PYLanguageChineseSimplified].location == 0 ) {
             _systemLanguage = PYLanguageChineseSimplified;
         }
+        else if ( [_systemLanguage rangeOfString:PYLanguageChineseTraditional].location == 0 ) {
+            _systemLanguage = PYLanguageChineseTraditional;
+        }
+        else if ( [_systemLanguage rangeOfString:PYLanguageFrench].location == 0 ) {
+            _systemLanguage = PYLanguageFrench;
+        }
+        else if ( [_systemLanguage rangeOfString:PYLanguageGerman].location == 0 ) {
+            _systemLanguage = PYLanguageGerman;
+        }
+        else if ( [_systemLanguage rangeOfString:PYLanguageJapanese].location == 0 ) {
+            _systemLanguage = PYLanguageJapanese;
+        }
+        else if ( [_systemLanguage rangeOfString:PYLanguageKorean].location == 0 ) {
+            _systemLanguage = PYLanguageKorean;
+        }
+        
         if ( [_systemLanguage length] == 0 ) {
             _systemLanguage = PYLanguageEnglish;
         }
@@ -145,7 +161,7 @@ PYSingletonDefaultImplementation
     @synchronized(self) {
         NSDictionary *_stringTable = [_stringDict objectForKey:_systemLanguage];
         if ( _stringTable == nil ) {
-            _stringTable = [_stringTable objectForKey:_defaultLanguage];
+            _stringTable = [_stringDict objectForKey:_defaultLanguage];
         }
         if ( _stringTable == nil ) return key;
         return [_stringTable objectForKey:key];

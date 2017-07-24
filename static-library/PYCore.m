@@ -365,7 +365,7 @@ NSDictionary *__initDeviceCache() {
             }
         }
         
-        if ( _localFile.length != 0 && _localData != nil ) {
+        if ( _localFile.length != 0 && _localData == nil ) {
             _localData = [NSData dataWithContentsOfFile:_localFile];
         }
         if ( _localData == nil ) {

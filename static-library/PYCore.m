@@ -355,11 +355,27 @@ NSDictionary *__initDeviceCache() {
         NSData *_localData = nil;
         
         if ( ![_fm fileExistsAtPath:_localFile] ) {
-            // Read from bundle
+            // Read from main bundle
             _localFile = [[NSBundle mainBundle] pathForResource:@"devicelist" ofType:@"json"];
+            if ( _localFile == nil || _localFile.length == 0 ) {
+                NSString* _bundlePath = [[NSBundle mainBundle] pathForResource:@"PYCore" ofType:@"bundle"];
+//                if ( _bundlePath == nil || _bundlePath.length == 0 ) {
+//                    _bundlePath = [[NSBundle bundleForClass:NSClassFromString(@"PYCore")]
+//                                   pathForResource:@"PYCore" ofType:@"bundle"];
+//                }
+                if ( !(_bundlePath == nil || _bundlePath.length == 0) ) {
+                    NSBundle* _bd = [NSBundle bundleWithPath:_bundlePath];
+                    _localFile = [_bd pathForResource:@"devicelist" ofType:@"json"];
+                }
+            }
         }
         
-        _localData = [NSData dataWithContentsOfFile:_localFile];
+        if ( _localFile.length != 0 && _localData != nil ) {
+            _localData = [NSData dataWithContentsOfFile:_localFile];
+        }
+        if ( _localData == nil ) {
+            _localData = __reloadDeviceList();
+        }
         NSError *_error = nil;
         id _dlist = [NSJSONSerialization
                      JSONObjectWithData:_localData

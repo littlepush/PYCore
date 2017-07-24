@@ -348,7 +348,7 @@ NSData *__reloadDeviceList()
 }
 
 NSDictionary *__initDeviceCache() {
-    static NSDictionary *_dcache = nil;
+    static NSMutableDictionary *_dcache = nil;
     if ( _dcache == nil ) {
         NSFileManager* _fm = [NSFileManager defaultManager];
         NSString *_localFile = [PYDOCUMENTPATH stringByAppendingPathComponent:@"devicelist.json"];
@@ -377,9 +377,9 @@ NSDictionary *__initDeviceCache() {
                      options:NSJSONReadingAllowFragments
                      error:&_error];
         if ( _error == nil ) {
-            _dcache = [NSDictionary object];
+            _dcache = [NSMutableDictionary dictionary];
             for ( NSDictionary *_dinfo in _dlist ) {
-                [_dcache setValue:_dinfo forKey:[_dinfo stringObjectForKey:@"identifier"]];
+                [_dcache setObject:_dinfo forKey:[_dinfo stringObjectForKey:@"identifier"]];
             }
         }
         // Async to update the device list

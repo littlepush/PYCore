@@ -358,14 +358,9 @@ NSDictionary *__initDeviceCache() {
             // Read from main bundle
             _localFile = [[NSBundle mainBundle] pathForResource:@"devicelist" ofType:@"json"];
             if ( _localFile == nil || _localFile.length == 0 ) {
-                NSString* _bundlePath = [[NSBundle mainBundle] pathForResource:@"PYKernel" ofType:@"bundle"];
-                if ( _bundlePath == nil || _bundlePath.length == 0 ) {
-                    _bundlePath = [[NSBundle bundleForClass:NSClassFromString(@"PYKernel")]
-                                   pathForResource:@"PYKernel" ofType:@"bundle"];
-                }
-                if ( !(_bundlePath == nil || _bundlePath.length == 0) ) {
-                    NSBundle* _bd = [NSBundle bundleWithPath:_bundlePath];
-                    _localFile = [_bd pathForResource:@"devicelist" ofType:@"json"];
+                NSBundle *_selfBundle = [NSBundle bundleWithIdentifier:@"org.cocoapods.PYCore"];
+                if ( _selfBundle != nil ) {
+                    _localFile = [_selfBundle pathForResource:@"devicelist" ofType:@"json"];
                 }
             }
         }

@@ -57,9 +57,9 @@
 - (NSUInteger)count
 {
     if ( _mutex == nil ) return 0;
-    NSNumber *_count = [_mutex lockAndDo:^id{
-        return PYIntToObject(_current);
-    }];
+    [_mutex lock];
+    NSNumber *_count = PYIntToObject(_current);
+    [_mutex unlock];
     return [_count unsignedIntValue];
 }
 
@@ -67,9 +67,9 @@
 - (BOOL)isAvailable
 {
     if ( _mutex == nil ) return NO;
-    NSNumber *_av = [_mutex lockAndDo:^id{
-        return PYBoolToObject(_available);
-    }];
+    [_mutex lock];
+    NSNumber *_av = PYBoolToObject(_available);
+    [_mutex unlock];
     return [_av boolValue];
 }
 
@@ -108,20 +108,23 @@
 - (BOOL)getUntil:(NSUInteger)timedout
 {
     if ( [self isAvailable] == NO ) return NO;
-    NSNumber *_result = [_mutex lockAndDo:^id{
+    [_mutex lock];
+    BOOL _result = NO;
+    do {
         if ( _current > 0 ) {
             _current -= 1;
-            return PYBoolToObject(YES);
+            _result = YES;
+            break;
         }
         int _err;
+        BOOL _wait_success = YES;
         if ( timedout == SEM_MAXTIMEOUT ) {
             while ( _current == 0 ) {
                 if ( pthread_cond_wait(&_sem, &_mutex->_mutex) == EINVAL ) {
-                    return PYBoolToObject(NO);
+                    _wait_success = NO;
+                    break;
                 }
             }
-            _current -= 1;
-            return PYBoolToObject(YES);
         } else {
             struct timespec ts;
             struct timeval  tv;
@@ -131,45 +134,52 @@
             long _OP = (ts.tv_nsec / 1000000000);
             if ( _OP ) ts.tv_nsec %= 1000000000;
             ts.tv_sec = tv.tv_sec + timedout / 1000 + _OP;
+    
             while ( _current == 0 ) {
                 _err = pthread_cond_timedwait(&_sem, &_mutex->_mutex, &ts);
                 // On time out or invalidate object
                 if ( _err == ETIMEDOUT || _err == EINVAL ) {
-                    return PYBoolToObject(NO);
+                    _wait_success = NO;
+                    break;
                 }
             }
+        }
+        if ( _wait_success == YES ) {
             _current -= 1;
-            return PYBoolToObject(YES);
-        }        
-    }];
-    return [_result boolValue];
+            _result = YES;
+        }
+    } while ( false );
+    [_mutex unlock];
+    return _result;
 }
 - (BOOL)tryGet
 {
     if ( [self isAvailable] == NO ) return NO;
-    NSNumber *_result = [_mutex lockAndDo:^id{
-        if ( _current > 0 ) {
-            _current -= 1;
-            return PYBoolToObject(YES);
-        }
-        return PYBoolToObject(NO);
-    }];
-    return [_result boolValue];
+    
+    BOOL _result = NO;
+    [_mutex lock];
+    if ( _current > 0 ) {
+        _current -= 1;
+        _result = YES;
+    }
+    [_mutex unlock];
+    return _result;
 }
 
 // Release a semaphore
 - (BOOL)give
 {
     if ( [self isAvailable] == NO ) return NO;
-    NSNumber *_result = [_mutex lockAndDo:^id{
-        if ( _current == _max ) {
-            return PYBoolToObject(NO);
-        }
+    BOOL _result = NO;
+    [_mutex lock];
+    do {
+        if ( _current == _max ) break;
         ++_current;
         pthread_cond_signal(&_sem);
-        return PYBoolToObject(YES);
-    }];
-    return [_result boolValue];
+        _result = YES;
+    } while ( false );
+    [_mutex unlock];
+    return _result;
 }
 
 // Destroy the semaphore
@@ -200,21 +210,16 @@
 
 - (void)_trySetStatue:(BOOL)statue
 {
-    [_mutex lockAndDo:^id{
-        if ( _available == statue ) {
-            return nil;
-        }
-        _available = statue;
-        return nil;
-    }];
+    [_mutex lock];
+    if ( _available != statue ) _available = statue;
+    [_mutex unlock];
 }
 
 - (void)clear
 {
-    [_mutex lockAndDo:^id{
-        _current = 0;
-        return nil;
-    }];
+    [_mutex lock];
+    _current = 0;
+    [_mutex unlock];
 }
 
 @end

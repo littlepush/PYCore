@@ -46,7 +46,7 @@
 #import <Foundation/Foundation.h>
 #include <pthread.h>
 
-typedef id (^PYMutexAction)();
+typedef id (^PYMutexAction)( void );
 
 typedef pthread_mutex_t     PYMutexHandleT;
 

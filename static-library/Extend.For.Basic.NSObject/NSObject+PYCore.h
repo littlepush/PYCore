@@ -73,7 +73,7 @@
 - (id)tryPerformSelector:(SEL)sel withObject:(id)obj1 withObject:(id)obj2;
 
 // Perform Block In background thread.
-- (void)performBlockInBackground:(void(^)())block;
+- (void)performBlockInBackground:(void(^)( void ))block;
 
 // The object must be a certain type, or throw an exception.
 - (void)mustBeTypeOrFailed:(Class)type;

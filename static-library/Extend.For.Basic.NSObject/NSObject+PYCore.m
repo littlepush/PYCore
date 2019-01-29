@@ -180,11 +180,11 @@ do {                                                                    \
         }
      );
 }
-- (void)_backgroundBlockInvocationSelector:(void(^)())block
+- (void)_backgroundBlockInvocationSelector:(void(^)( void ))block
 {
     if ( block ) block();
 }
-- (void)performBlockInBackground:(void (^)())block
+- (void)performBlockInBackground:(void (^)( void ))block
 {
     [self
      performSelectorInBackground:@selector(_backgroundBlockInvocationSelector:)

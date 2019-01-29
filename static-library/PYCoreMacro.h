@@ -82,7 +82,7 @@ extern "C" {
      the function use [struct tm] to get the date of seconds and 
      type [timeb] to get the millesecond
      */
-    NSString * __getCurrentFormatDate();
+    NSString * __getCurrentFormatDate( void );
     
     // Log fucntions
     /*
@@ -123,56 +123,56 @@ extern "C" {
     /*
      Get current application's document path.
      */
-    NSString *__doucmentPath( );
+    NSString *__doucmentPath( void );
 
     /*
      Get current application's library path.
      */
-    NSString *__libraryPath();
+    NSString *__libraryPath( void );
     /*
      Get current application's cache path.
      */
-    NSString *__cachePath();
+    NSString *__cachePath( void );
     /*
      Get a GUID string.
      */
-    NSString *__guid( );
+    NSString *__guid( void );
     /*
      Get a timestamp string.
      */
-    NSString *__timestampId( );
+    NSString *__timestampId( void );
     /* 
      Get the memory in use
      */
-    NSUInteger __getMemoryInUse();
+    NSUInteger __getMemoryInUse( void );
     /*
      Get free memory size
      */
-    NSUInteger __getFreeMemory();
+    NSUInteger __getFreeMemory( void );
     /*
      Get CPU usage
      */
-    NSArray *__getCPUUsage();
+    NSArray *__getCPUUsage( void );
     /*
      Check if current device is JailBroken
      */
-    BOOL __isJailBroken();
+    BOOL __isJailBroken( void );
     /*
      Get First MAC Address
      */
-    NSString *__getMACAddress();
+    NSString *__getMACAddress( void );
     /*
      Get current device's model name.
      */
-    NSString *__currentDeviceModelName();
+    NSString *__currentDeviceModelName( void );
     /*
      Get current device's display name.
      */
-    NSString *__currentDeviceName();
+    NSString *__currentDeviceName( void );
     /*
      Get free space of current device.
      */
-    unsigned long long __getFreeSpace();
+    unsigned long long __getFreeSpace( void );
     /*
      Convert the number bytes to a human readable string.
      1KB = 1024B
